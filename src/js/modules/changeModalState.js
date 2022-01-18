@@ -6,13 +6,17 @@ const changeModalState = (state) => {
         windowHeight = document.querySelectorAll('#height'),
         windowType = document.querySelectorAll('#view_type'),
         windowProfile = document.querySelectorAll('.checkbox');
+        
 
         checkNumInputs('#width');
         checkNumInputs('#height');
-
+       
 function bindActionToElem(event, elem, prop) {
+    
     elem.forEach((item, i)=> {
+        
         item.addEventListener(event, () => {
+            
             switch(item.nodeName) {
                 case 'SPAN':
                     state[prop] = i;
@@ -33,16 +37,14 @@ function bindActionToElem(event, elem, prop) {
                 case 'SELECT':
                     state[prop] = item.value;
                 break;
-                    
+                
             }
-
-            console.log(state);
-           
+console.log(state);
         });
     });
 }
 
-bindActionToElem('click',windowForm, 'form');
+bindActionToElem('click',windowForm, 'form','clickFired');
 bindActionToElem('input',windowWidth, 'width');
 bindActionToElem('input',windowHeight, 'height');
 bindActionToElem('change',windowType, 'type');
