@@ -4,12 +4,14 @@ const modals =()=> {
             modal = document.querySelector(modalSelector),
             closeBtn = document.querySelector(closeBtnSelector),
             windows = document.querySelectorAll('[data-modal]'),
-            requiredInputs = document.querySelectorAll('[data-required]');
+            scroll = calcScroll();
+
         const widthInput = document.querySelector('#width');
         const heightInput = document.querySelector('#height');
         const coldCheckbox = document.querySelector('[data-cold]');
         const warmCheckbox = document.querySelector('[data-warm]');
-       const selbox = document.querySelector('#view_type');
+      
+
     
         let warning = document.createElement('div');
         warning.classList.add('status');
@@ -80,6 +82,7 @@ function showModal() {
    
     modal.style.display = "block";
     document.body.style.overflow = "hidden";
+    document.body.style.marginRight = `${scroll}px`;
 } 
 if( isFilled) {
 windows.forEach(item =>{
@@ -89,6 +92,7 @@ windows.forEach(item =>{
 function closeModal() {
     modal.style.display = "none";
     document.body.style.overflow= "";
+    document.body.style.marginRight = `0px`;
 }
 }
 
@@ -98,6 +102,20 @@ function showModalByTime(selector, time) {
         document.body.style.overflow = "hidden";
     }, time);
 }
+
+function calcScroll () {
+    let div = document.createElement('div');
+    div.style.width = "50px";
+    div.style.height = "50px";
+    div.style.height = "50px";
+    div.style.overflow = "scroll";
+    div.style.visibility = "hidden";
+
+    document.body.appendChild(div);
+    let scrollWidth = div.offsetWidth-div.clientWidth; //повна ширина - клієнтська ширина без прокрутки
+    div.remove();
+    return scrollWidth;
+} 
             
 // showModalByTime('.popup',60000); 
 
